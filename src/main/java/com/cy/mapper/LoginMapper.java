@@ -10,7 +10,7 @@ import java.util.List;
  * @author: 𝓛.𝓕.𝓠
  */
 public interface LoginMapper extends BaseMapper<Login> {
-    @Select({"select * from login limit}"})
+    @Select({"select * from login}"})
     List<Login> find();
 }
 

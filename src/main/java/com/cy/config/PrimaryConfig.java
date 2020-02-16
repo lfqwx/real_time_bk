@@ -14,22 +14,22 @@ import javax.sql.DataSource;
 import static com.cy.config.DruidDataSource.getSqlSessionFactory;
 
 @Configuration
-//如此：不需要在没个实体类上注解
-@MapperScan(basePackages="com.cy.mapper")
+//如此:不需要在没个实体类上注解
+@MapperScan(basePackages="com.cy.mapper",sqlSessionFactoryRef="primarySqlSessionFactory")
 public class PrimaryConfig {
 
-    @Bean(name = "secondSqlSessionFactory")
-    public SqlSessionFactory primarySqlSessionFactory(@Qualifier("secondDataSource") DataSource dataSource,GlobalConfig globalConfiguration) throws Exception {
+    @Bean(name = "primarySqlSessionFactory")
+    public SqlSessionFactory primarySqlSessionFactory(@Qualifier("primaryDataSource") DataSource dataSource,GlobalConfig globalConfiguration) throws Exception {
         return getSqlSessionFactory(dataSource, globalConfiguration);
     }
 
-    @Bean(name = "secondTransactionManager")
-    public DataSourceTransactionManager primaryTransactionManager(@Qualifier("secondDataSource") DataSource dataSource) {
+    @Bean(name = "primaryTransactionManager")
+    public DataSourceTransactionManager primaryTransactionManager(@Qualifier("primaryDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "secondSqlSessionTemplate")
-    public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("secondSqlSessionFactory") SqlSessionFactory sqlSessionFactory){
+    @Bean(name = "primarySqlSessionTemplate")
+    public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("primarySqlSessionFactory") SqlSessionFactory sqlSessionFactory){
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

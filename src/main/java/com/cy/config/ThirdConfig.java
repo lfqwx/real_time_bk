@@ -15,7 +15,7 @@ import static com.cy.config.DruidDataSource.getSqlSessionFactory;
 
 @Configuration
 //如此:不需要在没个实体类上注解
-@MapperScan(basePackages="com.cy.mapper")
+@MapperScan(basePackages="com.cy.mapper",sqlSessionFactoryRef="thirdSqlSessionFactory")
 public class ThirdConfig {
 
     @Bean(name = "thirdSqlSessionFactory")
