@@ -1,5 +1,4 @@
-server:
-  port: 9200
+
 spring:
   datasource:
      primary:

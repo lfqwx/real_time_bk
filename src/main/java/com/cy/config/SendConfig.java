@@ -15,11 +15,11 @@ import static com.cy.config.DruidDataSource.getSqlSessionFactory;
 
 @Configuration
 //如此：不需要在没个实体类上注解
-@MapperScan(basePackages="com.cy.mapper",sqlSessionFactoryRef="secondSqlSessionFactory")
+@MapperScan(basePackages = "com.cy.mapper", sqlSessionFactoryRef = "secondSqlSessionFactory")
 public class SendConfig {
 
     @Bean(name = "secondSqlSessionFactory")
-    public SqlSessionFactory primarySqlSessionFactory(@Qualifier("secondDataSource") DataSource dataSource,GlobalConfig globalConfiguration) throws Exception {
+    public SqlSessionFactory primarySqlSessionFactory(@Qualifier("secondDataSource") DataSource dataSource, GlobalConfig globalConfiguration) throws Exception {
         return getSqlSessionFactory(dataSource, globalConfiguration);
     }
 
@@ -29,7 +29,7 @@ public class SendConfig {
     }
 
     @Bean(name = "secondSqlSessionTemplate")
-    public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("secondSqlSessionFactory") SqlSessionFactory sqlSessionFactory){
+    public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("secondSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }
